@@ -3,10 +3,10 @@ body {
 }
 
 .comment {
-  margin-top: 40px;
+  margin-top: 50px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: #2b4c5d;
 }
 
@@ -14,7 +14,7 @@ textarea {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   width: 800px;
-  height: 200px;
+  height: 250px;
   margin: 10vh auto 0;
   display: block;
   outline: solid 2px #2b4c5d;
@@ -59,6 +59,11 @@ textarea {
   outline: solid 2px #181717;
   -webkit-box-shadow: 10px 8px 5px #2b4c5d;
           box-shadow: 10px 8px 5px #2b4c5d;
+}
+
+.btn:hover {
+  background-color: #fdda94;
+  color: #000000;
 }
 
 .clearfix {
