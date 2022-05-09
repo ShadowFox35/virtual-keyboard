@@ -104,7 +104,7 @@ textarea {
   -webkit-box-shadow: 10px 8px 5px #fcc456;
           box-shadow: 10px 8px 5px #fcc456;
   border-radius: 45%;
-  -webkit-transition: border-radius 0.1s #444444;
-  transition: border-radius 0.1s #444444;
+  -webkit-transition: border-radius 0.5s #444444;
+  transition: border-radius 0.5s #444444;
 }
 /*# sourceMappingURL=style.css.map */

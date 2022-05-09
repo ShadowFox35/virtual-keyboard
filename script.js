@@ -644,6 +644,7 @@ if (localStorage.getItem('language') === 'English') {
 //    Создание кнопок
 
 function init(n) {
+  console.log(n);
   let keyPosition = '';
   for (let i = 0; i < 64; i++) {
     if (i == 14 || i == 29 || i == 42 || i == 55) {
@@ -705,73 +706,85 @@ document.onkeydown = function (event) {
       break;
     default:
       if (localStorage.getItem('language') === 'English') {
-        console.log('if English');
         if (shift && !caps) {
-          console.log('1');
           textArea.value +=
             eventLetter[5][eventCode.indexOf(event.code)];
         } else if (!shift && !caps) {
-          console.log('2');
           textArea.value +=
             eventLetter[1][eventCode.indexOf(event.code)];
         }
         if (!shift && caps) {
-          console.log('3');
           textArea.value +=
             eventLetter[3][eventCode.indexOf(event.code)];
         }
         if (shift && caps) {
-          console.log('4');
           textArea.value +=
             eventLetter[7][eventCode.indexOf(event.code)];
         }
       } else {
-        console.log('else - Russian');
         if (shift && !caps) {
           textArea.value +=
             eventLetter[4][eventCode.indexOf(event.code)];
         } else if (!shift && !caps) {
-          console.log('6');
           textArea.value +=
             eventLetter[0][eventCode.indexOf(event.code)];
         }
         if (!shift && caps) {
-          console.log('7');
           textArea.value +=
             eventLetter[2][eventCode.indexOf(event.code)];
         }
         if (shift && caps) {
-          console.log('8');
           textArea.value +=
             eventLetter[6][eventCode.indexOf(event.code)];
         }
       }
   }
 
-  if (eventCode.indexOf(event.code) != -1)
+  if (eventCode.indexOf(event.code) != -1) {
     document
       .querySelector('.keyboard > .' + event.code + '')
       .classList.add('active');
+  }
 };
-
+const addNewActive = (arr) => {
+  arr.forEach((elem) => {
+    document
+      .querySelector('.keyboard > .' + elem + '')
+      .classList.add('active');
+  });
+};
 // Удаление выделения кнопки при нажатии
 
 document.onkeyup = function (event) {
   switch (event.keyCode) {
+    case 20:
+      if (!caps) {
+        document
+          .querySelector('.keyboard > .' + event.code + '')
+          .classList.remove('active');
+      }
+      break;
     case 16:
       shiftClose();
       break;
     default:
-      if (eventCode.indexOf(event.code) != -1)
+      if (eventCode.indexOf(event.code) != -1) {
         document
           .querySelector('.keyboard > .' + event.code + '')
           .classList.remove('active');
+      }
   }
 };
 
 function CapsLock() {
   // если Капс включен, то вывключить
-  console.log('asd');
+  const allKeyBoard = document.querySelectorAll('.btn');
+  const arr = [];
+  allKeyBoard.forEach((elem) => {
+    if (elem.classList['2']) {
+      arr.push(elem.classList['1']);
+    }
+  });
   if (caps) {
     if (!shift) {
       if (localStorage.getItem('language') === 'Russian') {
@@ -795,37 +808,46 @@ function CapsLock() {
   else {
     if (!shift) {
       if (localStorage.getItem('language') === 'Russian') {
-        caps = true;
         init(2);
-      } else {
         caps = true;
+      } else {
         init(3);
+        caps = true;
       }
     } else {
       if (localStorage.getItem('language') === 'Russian') {
-        caps = true;
         init(6);
-      } else {
         caps = true;
+      } else {
         init(7);
+        caps = true;
       }
     }
   }
+  addNewActive(arr);
 }
 
 function shiftOpen() {
-  console.log('function shiftOpen');
+  console.log('func shiftOpen');
+  const allKeyBoard = document.querySelectorAll('.btn');
+  const arr = [];
+  allKeyBoard.forEach((elem) => {
+    if (elem.classList['2']) {
+      console.log('arr.push');
+      arr.push(elem.classList['1']);
+    }
+  });
   if (caps == false) {
-    console.log('caps == false');
+    console.log('func shiftOpen caps == false');
     if (localStorage.getItem('language') === 'Russian') {
-      init(4);
+      4;
       shift = true;
     } else {
+      console.log('func shiftOpen caps == false init(5);');
       init(5);
       shift = true;
     }
   } else {
-    console.log('caps == true');
     if (localStorage.getItem('language') === 'Russian') {
       init(6);
       shift = true;
@@ -834,10 +856,25 @@ function shiftOpen() {
       shift = true;
     }
   }
+  addNewActive(arr);
 }
 
 function shiftClose() {
-  console.log('function shiftClose');
+  const allKeyBoard = document.querySelectorAll('.btn');
+  const arr = [];
+  allKeyBoard.forEach((elem) => {
+    if (
+      elem.classList['2'] &&
+      elem.classList['1'] !== 'ShiftLeft' &&
+      elem.classList['1'] !== 'ShiftRight'
+    ) {
+      arr.push(elem.classList['1']);
+    }
+  });
+  // console.log(event.code);
+  // document
+  //   .querySelector('.keyboard > .' + event.code + '')
+  //   .classList.remove('active');
   if (caps == false) {
     if (localStorage.getItem('language') === 'Russian') {
       init(0);
@@ -847,7 +884,6 @@ function shiftClose() {
       shift = false;
     }
   } else {
-    console.log('caps == true');
     if (localStorage.getItem('language') === 'Russian') {
       init(2);
       shift = false;
@@ -856,6 +892,7 @@ function shiftClose() {
       shift = false;
     }
   }
+  addNewActive(arr);
 }
 
 // Смена языка
@@ -867,6 +904,16 @@ function CtrlAlt() {
   document.addEventListener('keydown', (event) => {
     if (event.keyCode == 17) flag = true;
     document.addEventListener('keyup', (event) => {
+      const allKeyBoard = document.querySelectorAll('.btn');
+      const arr = [];
+      allKeyBoard.forEach((elem) => {
+        if (
+          elem.classList['2'] &&
+          elem.classList['1'] !== event.code
+        ) {
+          arr.push(elem.classList['1']);
+        }
+      });
       if (
         event.keyCode == 18 &&
         flag &&
@@ -875,9 +922,11 @@ function CtrlAlt() {
         if (!caps) {
           init(0);
           localStorage.setItem('language', 'Russian');
+          addNewActive(arr);
         } else {
           init(2);
           localStorage.setItem('language', 'Russian');
+          addNewActive(arr);
         }
       } else if (
         event.keyCode == 18 &&
@@ -887,13 +936,21 @@ function CtrlAlt() {
         if (!caps) {
           init(1);
           localStorage.setItem('language', 'English');
+          addNewActive(arr);
         } else {
           init(3);
           localStorage.setItem('language', 'English');
+          addNewActive(arr);
         }
       }
       flag = false;
       smena = true;
+      // addNewActive(arr);
+      if (!caps) {
+        document
+          .querySelector('.keyboard > .' + 'CapsLock' + '')
+          .classList.remove('active');
+      }
     });
   });
 }
@@ -918,8 +975,6 @@ document.querySelector('.keyboard').onclick = function (
       );
       break;
     case 42:
-      console.log('case 42');
-      shiftOpen();
       break;
     case 55:
     case 57:
@@ -1018,17 +1073,55 @@ document.querySelector('.keyboard').onclick = function (
     ) == 29
   ) {
     if (caps) {
+      console.log('add active 4');
       document
         .querySelector('.keyboard > .' + 'CapsLock' + '')
         .classList.add('active');
-    } else
+    } else {
+      console.log('remove active 1');
       document
         .querySelector('.keyboard > .' + 'CapsLock' + '')
         .classList.remove('active');
+    }
   } else {
-    if (!event.target.classList.contains('keyboard'))
+    if (!event.target.classList.contains('keyboard')) {
+      console.log('add active 5');
       event.target.classList.add('active');
-    setTimeout(TimeOut, 200);
+      setTimeout(TimeOut, 200);
+    }
+  }
+};
+
+document.querySelector('.keyboard').onmousedown = function (
+  event
+) {
+  console.log('mousedown');
+  switch (
+    eventKeyCode.indexOf(
+      Number(event.target.getAttribute('data'))
+    )
+  ) {
+    case 42:
+      console.log('case 42');
+      shiftOpen();
+      break;
+      
+  }
+};
+
+document.querySelector('.keyboard').onmouseup = function (
+  event
+) {
+  console.log('mouseup');
+  switch (
+    eventKeyCode.indexOf(
+      Number(event.target.getAttribute('data'))
+    )
+  ) {
+    case 42:
+      console.log('case 42');
+      shiftClose();
+      break;
   }
 };
 
@@ -1036,11 +1129,9 @@ function TimeOut() {
   document
     .querySelectorAll('.keyboard .btn')
     .forEach((element) => {
-      if (element.getAttribute('data') != 20)
+      if (element.getAttribute('data') != 20) {
+        console.log('remove active 2');
         element.classList.remove('active');
+      }
     });
 }
-
-// document.addEventListener('keydown', function (event) {
-//   console.log(event);
-// });
