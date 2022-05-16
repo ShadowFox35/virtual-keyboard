@@ -1,3 +1,5 @@
+console.log('UPD');
+
 const eventCode = [
   'Backquote',
   'Digit1',
@@ -612,8 +614,9 @@ const eventLetter = [
   ],
 ];
 console.log(
-  'команды для проверки eslint: npm run lint или ./node_modules/.bin/eslint script.js',
+  'команды для проверки eslint: npm run lint или ./node_modules/.bin/eslint script.js'
 );
+
 //    Создание кнопок
 let caps = false;
 let shift = false;
@@ -625,7 +628,8 @@ function init(n) {
     }
     keyPosition += `<div class="btn ${eventCode[i]}" data = "${eventKeyCode[i]}">${eventLetter[n][i]}</div>`;
   }
-  document.querySelector('.keyboard').innerHTML = keyPosition;
+  document.querySelector('.keyboard').innerHTML =
+    keyPosition;
 }
 const addNewActive = (arr) => {
   arr.forEach((elem) => {
@@ -724,9 +728,9 @@ function shiftClose() {
   const arr = [];
   allKeyBoard.forEach((elem) => {
     if (
-      elem.classList['2']
-      && elem.classList['1'] !== 'ShiftLeft'
-      && elem.classList['1'] !== 'ShiftRight'
+      elem.classList['2'] &&
+      elem.classList['1'] !== 'ShiftLeft' &&
+      elem.classList['1'] !== 'ShiftRight'
     ) {
       arr.push(elem.classList['1']);
     }
@@ -763,16 +767,16 @@ function CtrlAlt() {
       const arr = [];
       allKeyBoard.forEach((elem) => {
         if (
-          elem.classList['2']
-          && elem.classList['1'] !== eventElem.code
+          elem.classList['2'] &&
+          elem.classList['1'] !== eventElem.code
         ) {
           arr.push(elem.classList['1']);
         }
       });
       if (
-        eventElem.keyCode === 18
-        && flag
-        && !(localStorage.getItem('language') === 'Russian')
+        eventElem.keyCode === 18 &&
+        flag &&
+        !(localStorage.getItem('language') === 'Russian')
       ) {
         if (!caps) {
           init(0);
@@ -784,9 +788,9 @@ function CtrlAlt() {
           addNewActive(arr);
         }
       } else if (
-        eventElem.keyCode === 18
-        && flag
-        && localStorage.getItem('language') === 'Russian'
+        eventElem.keyCode === 18 &&
+        flag &&
+        localStorage.getItem('language') === 'Russian'
       ) {
         if (!caps) {
           init(1);
@@ -809,12 +813,13 @@ function CtrlAlt() {
   });
 }
 
-const textarea = '<div class = "textarea"><textarea name = "textarea" rows="10" cols="100" readonly></textarea></div>';
+const textarea =
+  '<div class = "textarea"><textarea name = "textarea" rows="10" cols="100" readonly></textarea></div>';
 const body = document.querySelector('body');
 body.insertAdjacentHTML('beforeend', textarea);
 body.insertAdjacentHTML(
   'afterend',
-  '<div class="comment">Made on Windows<br>Change language: Ctrl + Alt</div>',
+  '<div class="comment">Made on Windows<br>Change language: Ctrl + Alt</div>'
 );
 
 // Хранение языка
@@ -845,7 +850,7 @@ document.onkeydown = (event) => {
     case 'Backspace':
       textArea.value = textArea.value.substr(
         0,
-        textArea.value.length - 1,
+        textArea.value.length - 1
       );
       break;
     case 'ControlLeft':
@@ -873,35 +878,35 @@ document.onkeydown = (event) => {
     default:
       if (localStorage.getItem('language') === 'English') {
         if (shift && !caps) {
-          textArea.value
-            += eventLetter[5][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[5][eventCode.indexOf(event.code)];
         } else if (!shift && !caps) {
-          textArea.value
-            += eventLetter[1][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[1][eventCode.indexOf(event.code)];
         }
         if (!shift && caps) {
-          textArea.value
-            += eventLetter[3][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[3][eventCode.indexOf(event.code)];
         }
         if (shift && caps) {
-          textArea.value
-            += eventLetter[7][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[7][eventCode.indexOf(event.code)];
         }
       } else {
         if (shift && !caps) {
-          textArea.value
-            += eventLetter[4][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[4][eventCode.indexOf(event.code)];
         } else if (!shift && !caps) {
-          textArea.value
-            += eventLetter[0][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[0][eventCode.indexOf(event.code)];
         }
         if (!shift && caps) {
-          textArea.value
-            += eventLetter[2][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[2][eventCode.indexOf(event.code)];
         }
         if (shift && caps) {
-          textArea.value
-            += eventLetter[6][eventCode.indexOf(event.code)];
+          textArea.value +=
+            eventLetter[6][eventCode.indexOf(event.code)];
         }
       }
   }
@@ -937,13 +942,13 @@ document.onkeyup = (event) => {
 document.querySelector('.keyboard').onclick = (event) => {
   switch (
     eventKeyCode.indexOf(
-      Number(event.target.getAttribute('data')),
+      Number(event.target.getAttribute('data'))
     )
   ) {
     case 13:
       textArea.value = textArea.value.substr(
         0,
-        textArea.value.length - 1,
+        textArea.value.length - 1
       );
       break;
     case 55:
@@ -971,65 +976,65 @@ document.querySelector('.keyboard').onclick = (event) => {
     default:
       if (localStorage.getItem('language') === 'English') {
         if (shift && !caps) {
-          textArea.value
-            += eventLetter[5][
+          textArea.value +=
+            eventLetter[5][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         } else if (!shift && !caps) {
-          textArea.value
-            += eventLetter[1][
+          textArea.value +=
+            eventLetter[1][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         }
         if (!shift && caps) {
-          textArea.value
-            += eventLetter[3][
+          textArea.value +=
+            eventLetter[3][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         }
         if (shift && caps) {
-          textArea.value
-            += eventLetter[7][
+          textArea.value +=
+            eventLetter[7][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         }
       } else {
         if (shift && !caps) {
-          textArea.value
-            += eventLetter[4][
+          textArea.value +=
+            eventLetter[4][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         } else if (!shift && !caps) {
-          textArea.value
-            += eventLetter[0][
+          textArea.value +=
+            eventLetter[0][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         }
         if (!shift && caps) {
-          textArea.value
-            += eventLetter[2][
+          textArea.value +=
+            eventLetter[2][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         }
         if (shift && caps) {
-          textArea.value
-            += eventLetter[6][
+          textArea.value +=
+            eventLetter[6][
               eventKeyCode.indexOf(
-                Number(event.target.getAttribute('data')),
+                Number(event.target.getAttribute('data'))
               )
             ];
         }
@@ -1037,7 +1042,7 @@ document.querySelector('.keyboard').onclick = (event) => {
   }
   if (
     eventKeyCode.indexOf(
-      Number(event.target.getAttribute('data')),
+      Number(event.target.getAttribute('data'))
     ) === 29
   ) {
     if (caps) {
@@ -1056,11 +1061,11 @@ document.querySelector('.keyboard').onclick = (event) => {
 };
 
 document.querySelector('.keyboard').onmousedown = (
-  event,
+  event
 ) => {
   switch (
     eventKeyCode.indexOf(
-      Number(event.target.getAttribute('data')),
+      Number(event.target.getAttribute('data'))
     )
   ) {
     case 42:
@@ -1074,7 +1079,7 @@ document.querySelector('.keyboard').onmousedown = (
 document.querySelector('.keyboard').onmouseup = (event) => {
   switch (
     eventKeyCode.indexOf(
-      Number(event.target.getAttribute('data')),
+      Number(event.target.getAttribute('data'))
     )
   ) {
     case 42:
